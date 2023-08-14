@@ -1,6 +1,3 @@
-const AWS = require('aws-sdk');
-
-
 var ScoldCounter = 0;
 
 document.addEventListener("DOMContentLoaded", UpdateScoldCounter);
@@ -9,8 +6,15 @@ function OnScolded(){
     ScoldCounter += 1;
     UpdateScoldCounter();
 }
-function UpdateScoldCounter(){
-    var scoldCounterElement = document.getElementById("ScoldCounter");
-    scoldCounterElement.textContent = "Dylan has been scolded: " + ScoldCounter + " times.";
+async function UpdateScoldCounter(){
+  await incrementParameter()
+  ScoldCounter = await fetchParameter()
+  var scoldCounterElement = document.getElementById("ScoldCounter");
+  scoldCounterElement.textContent = "Dylan has been scolded: " + ScoldCounter + " times.";
 }
-
+async function OnScreenLoaded(){
+  console.log(await fetchParameter())
+  ScoldCounter = await fetchParameter()
+  var scoldCounterElement = document.getElementById("ScoldCounter");
+  scoldCounterElement.textContent = "Dylan has been scolded: " + ScoldCounter + " times.";
+}
